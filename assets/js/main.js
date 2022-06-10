@@ -3,11 +3,14 @@ const form = document.querySelector('.formulario');
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();
-  const inputPeso = e.target.querySelector('#peso');
-  const inputAltura = e.target.querySelector('#altura');
-
-  const peso = Number(inputPeso.value);
-  const altura = Number(inputAltura.value);
+  const inputPeso = e.target.querySelector('#peso').value;
+  const inputAltura = e.target.querySelector('#altura').value;
+  
+  const valorPeso = inputPeso.replace(",",".");
+  const valorAltura = inputAltura.replace(",",".");
+  
+  const peso = Number(valorPeso);
+  const altura = Number(valorAltura);
 
   if (!peso || peso > 600) { // Se pesso for falso, no caso NaN, pois convertemos a string adicionada pelo usuário para Number
     setResultado('Peso inválido', false);
