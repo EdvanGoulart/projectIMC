@@ -5,19 +5,19 @@ form.addEventListener('submit', function (e) {
   e.preventDefault();
   const inputPeso = e.target.querySelector('#peso').value;
   const inputAltura = e.target.querySelector('#altura').value;
-  
-  const valorPeso = inputPeso.replace(",",".");
-  const valorAltura = inputAltura.replace(",",".");
-  
+
+  const valorPeso = inputPeso.replace(",", ".");
+  const valorAltura = inputAltura.replace(",", ".");
+
   const peso = Number(valorPeso);
   const altura = Number(valorAltura);
 
-  if (!peso || peso > 600) { // Se pesso for falso, no caso NaN, pois convertemos a string adicionada pelo usuário para Number
+  if (!peso || peso > 600 || peso < 0) { // Se pesso for falso, no caso NaN, pois convertemos a string adicionada pelo usuário para Number
     setResultado('Peso inválido', false);
     return; // ele para aqui
   }
 
-  if (!altura || altura > 3) {
+  if (!altura || altura > 3 || altura < 0) {
     setResultado('Altura inválida', false);
     return;
   }
@@ -30,7 +30,7 @@ form.addEventListener('submit', function (e) {
   setResultado(msg, true); // passa true pois chegou até aqui e está tudo correto.
 });
 
-function getNivelImc (imc) { // Posso criar funções em qualquer lugar em JS, pois ele eleva elas, vamos ver isso.
+function getNivelImc(imc) { // Posso criar funções em qualquer lugar em JS, pois ele eleva elas, vamos ver isso.
   const nivel = ['Abaixo do peso', 'Peso normal', 'Sobrepeso',
     'Obesidade grau 1', 'Obesidade grau 2', 'Obesidade grau 3'];
 
@@ -42,17 +42,17 @@ function getNivelImc (imc) { // Posso criar funções em qualquer lugar em JS, p
   if (imc < 18.5) return nivel[0];
 }
 
-function getImc (peso, altura) {
+function getImc(peso, altura) {
   const imc = peso / altura ** 2;
   return imc.toFixed(2);
 }
 
-function criaP () {
+function criaP() {
   const p = document.createElement('p');//Criando uma tag <p/>
   return p;
 }
 
-function setResultado (msg, isValid) {
+function setResultado(msg, isValid) {
   const resultado = document.querySelector('#resultado'); // seleciona a div criada no html com o id '#resultado'
   resultado.innerHTML = ''; //Deixa o resultado vazio
 
